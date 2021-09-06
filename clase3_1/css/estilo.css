@@ -1,0 +1,20 @@
+body {
+    background-color: rgba(226, 142, 86, 0.877);
+}
+
+h1 {
+    text-align: center;
+}
+
+#Parrafo1 {
+    color: powderblue;
+}
+
+.letra_verde {
+    color: green;
+}
+
+.fondo_purpura{
+    background-color: purple;
+
+}
