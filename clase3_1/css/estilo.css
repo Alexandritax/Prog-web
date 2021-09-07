@@ -1,5 +1,11 @@
 body {
-    background-color: rgba(226, 142, 86, 0.877);
+    background: linear-gradient(to right top, #cf33ff 0%, #1e0ff5 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+div {
+    background-color: rgba(226, 212, 86, 0.877);
 }
 
 h1 {
@@ -17,4 +23,9 @@ h1 {
 .fondo_purpura{
     background-color: purple;
 
+}
+
+.bordered_list {
+    border: 1px solid;
+    border-width: medium;
 }
