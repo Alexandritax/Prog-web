@@ -36,3 +36,7 @@ h1 {
     text-align: right;
     font-size: 1.5em;
 }
+
+#foot-text:hover::first-letter {
+    background: radial-gradient(ellipse farthest-corner, red, yellow 10%, #1E90FF 50%, #4316f7);
+}
