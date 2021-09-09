@@ -41,62 +41,75 @@
     </div>
     <div>
         <!--banner-->
-        <img src="imagenes\csgo.jpg" alt="CSGO banner"/>
+        <img class="img-fluid" src="imagenes\csgo.jpg" alt="CSGO banner"/>
     </div>
-    <div>
+    <div class="row">
         <!--Secciones secundarias-->
-        <div>
-            <h3>Eventos abiertos</h3>
-            <div>
-                <div>
-                    CS Perú 2021
-                </div>
-                <div>
-                    CS Perú 2021
-                </div>
-                <div>
-                    CS Perú 2021
+        <div class="col-2">
+            <div class="card">
+                <h3 class="card-header">Eventos abiertos</h3>
+                <div class="card-body">
+                    <div>
+                        CS Perú 2021
+                    </div>
+                    <div>
+                        CS Perú 2021
+                    </div>
+                    <div>
+                        CS Perú 2021
+                    </div>
                 </div>
             </div>
         </div>
-        <div>
-            <h3>Top players</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Player</th>
-                        <th>Maps</th>
-                        <th>Rounds</th>
-                        <th>K-D Diff</th>
-                        <th>K/D</th>
-                        <th>Rating</th>
-                    </tr>
-                </thead>
-            </table>
+        <div class="col-5">
+            <div class="card">
+                <h3 class="card-header">Top players</h3>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Maps</th>
+                                <th>Rounds</th>
+                                <th>K-D Diff</th>
+                                <th>K/D</th>
+                                <th>Rating</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div>
-            <h3>Registra tu equipo</h3>
-            <form action="">
-                <div>
-                    <label>Correo</label>
-                    <input type="text">
+        <div class="col-5">
+            <div class="card">
+                <h3 class="card-header">Registra tu equipo</h3>
+                <div class="card-body">
+                    <form action="">
+                        <div>
+                            <label>Correo</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label>Password</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <label>Nombre</label>
+                            <input type="text">
+                        </div>
+                        <div>
+                            <button type="button">Registrar</button>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <label>Password</label>
-                    <input type="text">
-                </div>
-                <div>
-                    <label>Nombre</label>
-                    <input type="text">
-                </div>
-                <div>
-                    <button type="button">Registrar</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-    <div>
+    <div class="card">
         <!--footer-->
+        <div class="card-body">
+            <footer>Universidad de Lima - Programacion web 2021-2</footer>
+        </div>
     </div>
 </body>
 </html>
