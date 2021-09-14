@@ -1,12 +1,118 @@
 <!DOCTYPE html>
 <html lang="en" lang="es">
     <head>
+        <meta charset="UTF-8" />
         <title>Javascript</title>
         <script src="/index.js"></script>
+        <link href="index.css" type="text/css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div>
-            <button type="button" onclick="clickMeOnClick()">click me</button>
-        </div>
+        <input id="txt_numeros" class="form-control" type="text" value="0">
+            <div class="row mb-2">
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(1)">1</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(2)">2</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(3)">3</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="signoOnClick('+')">+</button>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(4)">4</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(5)">5</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(6)">6</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="signoOnClick('-')">-</button>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(7)">7</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(8)">8</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(9)">9</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="signoOnClick('*')">*</button>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    >C</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="numeroOnClick(0)">0</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    >=</button>
+                </div>
+                <div class="col">
+                    <button 
+                    type="button" 
+                    class="btn btn-primary"
+                    onclick="signoOnClick('/')">/</button>
+                </div>
+            </div>
     </body>
 </html>
