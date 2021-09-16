@@ -124,32 +124,16 @@ const operacionOnClickNoObstrusivo = (evt) => {
     }
 }
 const main = () => {
-    const but_1=document.getElementById("but_1")
-    const but_2=document.getElementById("but_2")
-    const but_3=document.getElementById("but_3")
-    const but_4=document.getElementById("but_4")
-    const but_5=document.getElementById("but_5")
-    const but_6=document.getElementById("but_6")
-    const but_7=document.getElementById("but_7")
-    const but_8=document.getElementById("but_8")
-    const but_9=document.getElementById("but_9")
-    const but_0=document.getElementById("but_0")
+    for (var i = 0; i < 10; i++){
+        const but = document.getElementById("but_"+ i)
+        but.onclick = numeroOnClickNoObstrusivo;
+    }
     const but_mas=document.getElementById("but_+")
     const but_menos=document.getElementById("but_-")
     const but_mult=document.getElementById("but_*")
     const but_div=document.getElementById("but_/")
     const but_igual=document.getElementById("but_=")
     const but_clear=document.getElementById("but_c")
-    but_1.onclick = numeroOnClickNoObstrusivo;
-    but_2.onclick = numeroOnClickNoObstrusivo;
-    but_3.onclick = numeroOnClickNoObstrusivo;
-    but_4.onclick = numeroOnClickNoObstrusivo;
-    but_5.onclick = numeroOnClickNoObstrusivo;
-    but_6.onclick = numeroOnClickNoObstrusivo;
-    but_7.onclick = numeroOnClickNoObstrusivo;
-    but_8.onclick = numeroOnClickNoObstrusivo;
-    but_9.onclick = numeroOnClickNoObstrusivo;
-    but_0.onclick = numeroOnClickNoObstrusivo;
     but_mas.onclick = operacionOnClickNoObstrusivo;
     but_menos.onclick = operacionOnClickNoObstrusivo;
     but_mult.onclick = operacionOnClickNoObstrusivo;
