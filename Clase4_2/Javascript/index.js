@@ -46,7 +46,7 @@ const numeroOnClickNoObstrusivo = (evt) => {
     else inputNumero.value = numeroStr + numero;
 }
 
-const operacionOnClick = (op) => {
+/*const operacionOnClick = (op) => {
     const inputNumero = document.getElementById("txt_numeros");
     if (op == "C") {
         inputNumero.value="0";
@@ -82,8 +82,47 @@ const operacionOnClick = (op) => {
         inputNumero.value = res
         }
     }
-}
+}*/
 
+const operacionOnClickNoObstrusivo = (evt) => {
+    const inputNumero = document.getElementById("txt_numeros");
+    const but = evt.target
+    const op = but.innerHTML
+    if (op == "C") {
+        inputNumero.value="0";
+    }
+    else if (op == "+") {
+        const numero = inputNumero.value;
+        numeroIngresado = parseInt(numero);
+        estado = true;
+        simbolo = sumar;
+    }
+    else if (op == "-") {
+        const numero = inputNumero.value;
+        numeroIngresado = parseInt(numero);
+        estado = true;
+        simbolo = restar;
+    }
+    else if (op == "*") {
+        const numero = inputNumero.value;
+        numeroIngresado = parseInt(numero);
+        estado = true;
+        simbolo = multiplicar;
+    }
+    else if (op == "/") {
+        const numero = inputNumero.value;
+        numeroIngresado = parseInt(numero);
+        estado = true;
+        simbolo = dividir;
+    }
+    else if (op == "=") {
+        if (simbolo !=undefined){
+        const numero = inputNumero.value
+        const res = simbolo(numeroIngresado, parseInt(numero))
+        inputNumero.value = res
+        }
+    }
+}
 const main = () => {
     const but_1=document.getElementById("but_1")
     const but_2=document.getElementById("but_2")
@@ -95,6 +134,12 @@ const main = () => {
     const but_8=document.getElementById("but_8")
     const but_9=document.getElementById("but_9")
     const but_0=document.getElementById("but_0")
+    const but_mas=document.getElementById("but_+")
+    const but_menos=document.getElementById("but_-")
+    const but_mult=document.getElementById("but_*")
+    const but_div=document.getElementById("but_/")
+    const but_igual=document.getElementById("but_=")
+    const but_clear=document.getElementById("but_c")
     but_1.onclick = numeroOnClickNoObstrusivo;
     but_2.onclick = numeroOnClickNoObstrusivo;
     but_3.onclick = numeroOnClickNoObstrusivo;
@@ -105,6 +150,11 @@ const main = () => {
     but_8.onclick = numeroOnClickNoObstrusivo;
     but_9.onclick = numeroOnClickNoObstrusivo;
     but_0.onclick = numeroOnClickNoObstrusivo;
-    
+    but_mas.onclick = operacionOnClickNoObstrusivo;
+    but_menos.onclick = operacionOnClickNoObstrusivo;
+    but_mult.onclick = operacionOnClickNoObstrusivo;
+    but_div.onclick = operacionOnClickNoObstrusivo;
+    but_igual.onclick = operacionOnClickNoObstrusivo;
+    but_clear.onclick = operacionOnClickNoObstrusivo;
 }
 main();
