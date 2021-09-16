@@ -123,22 +123,16 @@ const operacionOnClickNoObstrusivo = (evt) => {
         }
     }
 }
+
 const main = () => {
     for (var i = 0; i < 10; i++){
         const but = document.getElementById("but_"+ i)
         but.onclick = numeroOnClickNoObstrusivo;
     }
-    const but_mas=document.getElementById("but_+")
-    const but_menos=document.getElementById("but_-")
-    const but_mult=document.getElementById("but_*")
-    const but_div=document.getElementById("but_/")
-    const but_igual=document.getElementById("but_=")
-    const but_clear=document.getElementById("but_c")
-    but_mas.onclick = operacionOnClickNoObstrusivo;
-    but_menos.onclick = operacionOnClickNoObstrusivo;
-    but_mult.onclick = operacionOnClickNoObstrusivo;
-    but_div.onclick = operacionOnClickNoObstrusivo;
-    but_igual.onclick = operacionOnClickNoObstrusivo;
-    but_clear.onclick = operacionOnClickNoObstrusivo;
+    const arrOperaciones = ['+','-','*','/','c','=']
+    for(var op of arrOperaciones){
+        const but = document.getElementById("but_"+op)
+        but.onclick = operacionOnClickNoObstrusivo
+    }
 }
-main();
+windows.addEventListener("load", main);
