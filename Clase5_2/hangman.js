@@ -10,8 +10,8 @@ const elegirRefran = () => {
 }
 
 const ocultarRefran = (refran) => {
-    var refranOculto = ""
-    for(var caracter of refran) {
+    let refranOculto = ""
+    for(let caracter of refran) {
         if (caracter != " ") {
             //debe de ocultarRefran
             refranOculto += "_"
@@ -23,11 +23,18 @@ const ocultarRefran = (refran) => {
     return refranOculto
 }
 
+const cargarRefran = (refran) => {
+    //const divrefran = document.getElementById("refran") // son iguales
+    const  divrefran = document.querySelector("#refran") // son iguales
+    divrefran.innerHTML = "<p>" + refran + "</p>"
+    //divrefran.innerText = refran;
+}
+
 const main = () => {
     const refran = elegirRefran();
     const refranOculto = ocultarRefran(refran)
+    cargarRefran(refranOculto);
     console.log(refran)
-    console.log(refranOculto)
 }
 
 window.addEventListener("load",main)
