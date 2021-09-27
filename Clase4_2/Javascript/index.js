@@ -146,9 +146,6 @@ const construirCalculadora = () => {
 
 const main = () => {
     construirCalculadora();
-
-
-
     for (var i =0 ; i < 10; i++) {
         const but = document.getElementById("but" + i)
         //but.onclick = numeroOnClickNoObstrusivo
