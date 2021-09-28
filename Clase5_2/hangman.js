@@ -55,17 +55,43 @@ const cambiarImagen = () => {
     let imgSrc = document.getElementById("ahorcado")
     //console.log(imgSrc.getAttribute("src"))
     imgSrc.setAttribute("src","/hangman_pics/Hangman-"+Errores+".png")
+    if(Errores==6){
+        //document.getElementById("letras").style.display="none"
+        //document.getElementById("GameOver").style.display="block"
+        mostrarAlerta(false)
+    }
 }
+
+const mostrarAlerta = (gano) => {
+    const divAlert = document.createElement("div")
+    document.getElementById("letras").style.display="none"
+    if (gano){
+        divAlert.setAttribute("class","alert alert-success mt-4")
+        divAlert.innerText = "Ganaste ╰(*°▽°*)╯"
+    }
+    else{
+        divAlert.setAttribute("class","alert alert-danger mt-4")
+        divAlert.innerText = "Perdiste (╯°□°）╯︵ ┻━┻"
+    }
+
+    const divParteDerecha = document.querySelector("#parte_derecha")
+    divParteDerecha.appendChild(divAlert)
+}
+
 const letraInputOnKeyPress = (evt) => {
+    document.getElementById("letras").value=""
     const letraIngresada = evt.key.toUpperCase()
     const nuevoRefranOculto = buscarLetterRefran(letraIngresada, Refran, RefranOculto)
-    if(nuevoRefranOculto == RefranOculto && Errores<6){
+    if(nuevoRefranOculto == RefranOculto){
         //console.log("Nueva Imagen")
         cambiarImagen()
     }
     else {
         RefranOculto = nuevoRefranOculto
         cargarRefran(RefranOculto);
+    }
+    if(nuevoRefranOculto == Refran){
+        mostrarAlerta(true)
     }
 }
 
