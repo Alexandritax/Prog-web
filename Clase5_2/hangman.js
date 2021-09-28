@@ -48,17 +48,27 @@ const buscarLetterRefran = (letra, refran, refranOculto) => {
 }
 var Refran = elegirRefran();
 var RefranOculto = ocultarRefran(Refran)
+var Errores = 0;
+
+const cambiarImagen = () => {
+    Errores++
+    let imgSrc = document.getElementById("ahorcado")
+    //console.log(imgSrc.getAttribute("src"))
+    imgSrc.setAttribute("src","hangman_pics\\Hangman-"+Errores+".png")
+}
 const letraInputOnKeyPress = (evt) => {
     const letraIngresada = evt.key.toUpperCase()
     const nuevoRefranOculto = buscarLetterRefran(letraIngresada, Refran, RefranOculto)
-    if(nuevoRefranOculto == RefranOculto){
-        console.log("Nueva Imagen")
+    if(nuevoRefranOculto == RefranOculto && Errores<6){
+        //console.log("Nueva Imagen")
+        cambiarImagen()
     }
     else {
         RefranOculto = nuevoRefranOculto
         cargarRefran(RefranOculto);
     }
 }
+
 
 const main = () => {
     cargarRefran(RefranOculto);
