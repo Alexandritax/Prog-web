@@ -1,8 +1,9 @@
 const crearBoton = (i,j) => {
     var but = document.createElement("button")
-    but.setAttribute("class", "btn btn-primary")
+    but.setAttribute("class", "btn btn-primary white")
     but.setAttribute("type", "button")
-    but.setAttribute("id","but_"+i+j+" white")
+    but.setAttribute("id","but_"+(i-1)+(j-1))
+    //but.setAttribute("style","background-color: white; color:black")
     but.innerText=i + "," + j
     return but;
 }
@@ -31,33 +32,40 @@ const cambio = (evt) => {
     //console.log(but.id)
     //but_11_ 6
     var id = but.id
-    var idbut = id.substring(4,6)
+    const Bclass = but.className;
+    const idbut = id.substring(4,6)
     let sup = idbut-10
-    let inf = idbut+10
-    if(id.substring(7,12)=="white"){
-        but.setAttribute("id","but_"+idbut+" black")
+    let inf = parseInt(idbut)+10
+    //console.log(Bclass.substring(15,21) + "; "+ sup + " " + inf)
+    if(Bclass.substring(15,21)=="white"){
+        but.setAttribute("class","btn btn-primary black")
+        //but.setAttribute("style","background-color: black; color:white")
     }
     else{
-        but.setAttribute("id","but_"+idbut+" white")
+        but.setAttribute("class","btn btn-primary white")
+        //but.setAttribute("style","background-color: white; color:black")
     }
-    if(sup > 10){
-        if(document.getElementById("but_"+sup+" black")!=null){
-            let butsup = document.getElementById("but_"+sup+" black")
-            butsup.setAttribute("id","but_"+sup+" white")
+    if(sup > 0){
+        let butsup = document.getElementById("but_"+sup)
+        if(butsup.className!="btn btn-primary black"){
+            
+            butsup.setAttribute("class","btn btn-primary white")
+            //butsup.setAttribute("style","background-color: white; color:black")
         }
         else{
-            let butsup = document.getElementById("but_"+sup+" white")
-            butsup.setAttribute("id","but_"+sup+" black")
+            butsup.setAttribute("class","btn btn-primary black")
+            //butsup.setAttribute("style","background-color:black; color:white")
         }   
     }
-    if(inf<10){
-        if(document.getElementById("but_"+inf+" black")!=null){
-            let butinf = document.getElementById("but_"+inf+" black")
-            butinf.setAttribute("id","but_"+inf+" white")
+    if(inf<100){
+        let butinf = document.getElementById("but_"+inf)
+        if(butinf.className!="btn btn-primary black"){
+            butinf.setAttribute("class","btn btn-primary white")
+            //butinf.setAttribute("style","background-color: white; color:black")
         }
         else{
-            let butinf = document.getElementById("but_"+inf+" white")
-            butinf.setAttribute("id","but_"+inf+" black")
+            butinf.setAttribute("class","btn btn-primary black")
+            //butinf.setAttribute("style","background-color:black; color:white")
         }  
     }
      
@@ -66,12 +74,15 @@ const main = () => {
     var Tabla=document.body.firstElementChild.nextElementSibling.firstElementChild;
     var nuevaTB = crearCasilleros(10);
     Tabla.appendChild(nuevaTB)
-    for (let i = 1; i<= 10;i++){
-        for (let j = 1; j <= 10;j++){
-            const button_w = document.getElementById("but_"+i+j+" white")
+    for (let i = 0; i< 10;i++){
+        for (let j = 0; j < 10;j++){
+            const button_w = document.getElementById("but_"+i+j)
             button_w.addEventListener("click",cambio)
         }
     }
+
+
 }
+
 
 window.addEventListener("load",main)
