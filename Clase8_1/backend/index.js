@@ -1,8 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 
 const app = express()
 const PORT = 4444
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(express.static('assets'))
 //endpoints
 app.get('/ejemplo1',(req,res) => {
     const textoResponse = "Hola PW"
@@ -36,11 +40,17 @@ app.get("/ejemplo4",(req, res) => {
 //recibir data por medio de forms
 app.get('/ejemplo5-formulario',(req,res) => {
     const formulario = "<form>" + 
-        "<div>Nombre: <input type='text'/></div>" +
-        "<div>Codigo: <input type='text'/></div>" +
+        "<div>Nombre: <input name='frm_nombre' type='text'/></div>" +
+        "<div>Codigo: <input name='frm_codigo' type='text'/></div>" +
         "<div><button type='submit'>Enviar</button></div>" +
     "</form>"
     res.send(formulario)
+})
+
+// Endpoint que recibe los datos del formulario
+app.post('/ejemplo5-formulario',(req,res)=> {
+    console.log("data-form",req.body)
+    res.send(`<script src='/js/index.js'></script><h1>${req.body.frm_nombre}</h1><h2>${req.body.frm_codigo}</h2>`)//en mi pc la combinacion alt*derecho + \ da ` en el teclado español 
 })
 
 app.listen(PORT, () => {
