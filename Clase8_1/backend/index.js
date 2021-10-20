@@ -7,6 +7,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static('assets'))
+app.set("view engine","ejs")
 //endpoints
 app.get('/ejemplo1',(req,res) => {
     const textoResponse = "Hola PW"
