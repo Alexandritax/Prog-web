@@ -1,2 +1,20 @@
 usar el comando npm init -y para crear un package.json.
 luego usar npm install express ejs --save para instalar los paquetes
+crear el codigo index.js para que sea ejecutado con node como servidor:
+
+    const express = require('express');
+
+    const PORT = 5000;
+    const app = express();
+
+    app.use(express.static('assets')) //esta carpeta es para archivos estaticos
+    app.set("view engine", 'ejs')
+
+    app.get('/', (req, res) => {
+        res.render('index')
+    })
+
+    app.listen(PORT, ()=> {
+        console.log("El servidor inicio correctamente");
+    })
+
