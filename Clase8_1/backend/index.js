@@ -41,15 +41,14 @@ app.get("/ejemplo4",(req, res) => {
 //recibir data por medio de forms
 app.get('/ejemplo5-formulario',(req,res) => {
     res.render('formulario')
-    res.send(formulario)
 })
 
 // Endpoint que recibe los datos del formulario
 app.post('/ejemplo5-formulario',(req,res)=> {
     console.log("data-form",req.body)
     res.render('formulario_respuesta', {
-        nombre : req.body.nombre,
-        codigo : req.body.codigo
+        nombre : req.body.frm_nombre,
+        codigo : req.body.frm_codigo
     })
 })
 //           en mi pc la combinacion
