@@ -1,0 +1,2 @@
+usar el comando npm init -y para crear un package.json.
+luego usar npm install express ejs --save para instalar los paquetes
