@@ -23,6 +23,15 @@ const peticionConPromesas = () => {
 let numImagen = 0
 let imagenes = []
 
+const cambiarImagenes = () => {
+    const img = document.querySelector("#banner")
+
+    if (imagenes.length == numImagen) {
+        numImagen = 0;
+    }
+    img.setAttribute("src", imagenes[numImagen++].url)
+}
+
 const peticionConAsyncAwait = async () => {
     const response = await fetch(URL_BACKEND)
     // const data = await response.json()
@@ -49,12 +58,8 @@ const main = () => {
     if (imagenes == null) {
         peticionConAsyncAwait()
     }
-    const img = document.querySelector("#banner")
-    setTimeout(
-        () => {if (imagenes.length == numImagen){
-             numImagen = 0
-                }
-            img.setAttribute("src", imagenes[numImagen++].url)},10000)
+    window.setInterval(cambiarImagenes,10000)
+
     const butBorrar = document.querySelector("#boton")
     butBorrar.addEventListener("click",() => {
         console.log("borrar")
