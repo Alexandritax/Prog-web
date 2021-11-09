@@ -8,8 +8,31 @@
     </head>
     <body class="container">
         <%- include('menu') %>
-
-        <div>Aca ira la lista de torneos para administrarlos</div>
+        <h2>Mantenimiento de torneos</h2>
+        <button class="btn btn-success" href="#" type="submit">Nuevo</button>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% torneos.forEach( (torneo) => { %>
+                    <tr>
+                        <td><%= torneo.id %></td>
+                        <td><%= torneo.nombre %></td>
+                        <td><%= torneo.fecha %></td>
+                        <td>
+                            <a href="#" >Editar</a>
+                            <a href="#" >Eliminar</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
 
         <%- include('footer') %>
     </body>
