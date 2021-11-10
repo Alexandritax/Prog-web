@@ -9,7 +9,7 @@
     <body class="container">
         <%- include('menu') %>
         <h2>Mantenimiento de torneos</h2>
-        <button class="btn btn-success" href="#" type="submit">Nuevo</button>
+        <a class="btn btn-success" href="/torneos/new">Nuevo</a>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -24,10 +24,10 @@
                     <tr>
                         <td><%= torneo.id %></td>
                         <td><%= torneo.nombre %></td>
-                        <td><%= torneo.fecha %></td>
+                        <td><%= torneo.fecha.toLocaleDateString('es-PE') %></td>
                         <td>
-                            <a href="#" >Editar</a>
-                            <a href="#" >Eliminar</a>
+                            <a href="/torneos/update/<%= torneo.id %>" >Editar</a>
+                            <a href="/torneos/eliminar/<%= torneo.id %>" >Eliminar</a>
                         </td>
                     </tr>
                 <% }) %>
