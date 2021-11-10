@@ -74,11 +74,15 @@ app.get('/torneos', async (req, res) => {
         res.render('/login')
     }
     else {
-        //Obtener torneos de la base de datos.
-        const torneos = await db.Torneo.findAll();
+        // Obtener torneos de la base de datos
+        const torneos = await db.Torneo.findAll({
+            order : [
+                ['id', 'DESC']
+            ]
+        });
         //console.log(torneos);
-        res.render("torneos", {
-        torneos: torneos
+        res.render('torneos', {
+            torneos : torneos
         })
     }    
 })
