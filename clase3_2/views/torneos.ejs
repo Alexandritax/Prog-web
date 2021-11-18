@@ -15,6 +15,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
+                    <th>Tipo Torneo</th>
                     <th>Fecha</th>
                     <th>Acciones</th>
                 </tr>
@@ -24,6 +25,7 @@
                     <tr>
                         <td><%= torneo.id %></td>
                         <td><%= torneo.nombre %></td>
+                        <td><%= torneo.tipoTorneoNombre %></td>
                         <td><%= torneo.fecha.toLocaleDateString('es-PE') %></td>
                         <td>
                             <a href="/torneos/update/<%= torneo.id %>" >Editar</a>

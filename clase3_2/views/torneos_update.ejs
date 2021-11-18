@@ -19,6 +19,19 @@
                     class="form-control"
                     value="<%= torneo.nombre %>" />
             </div>
+            <div>
+                <label class="form-label">Tipo Torneo:</label>
+                <select name="torneo_tipotorneo_id" class="form-select">
+                    <option value="-1">----- Seleccione una opción -----</option>
+                    <% tiposTorneo.forEach( (tipo)=> { %>
+                        <% if (tipo.id == torneo.tipoTorneoId)  { %>
+                            <option selected value="<%= tipo.id%>"><%= tipo.nombre %></option>
+                        <% }else { %>
+                            <option value="<%= tipo.id%>"><%= tipo.nombre %></option>
+                        <% } %>
+                    <% }) %>
+                </select>
+            </div>
             <div class="mb-2">
                 <label class="form-label">Fecha:</label>
                 <input name="torneo_fecha" 
@@ -28,7 +41,35 @@
             </div>
             <button type="submit" class="btn btn-success">Guardar</button>
         </form>
-
+        <div class="col">
+            <!-- Lista de equipos -->
+            <h3>Equipos registrados</h3>
+            <div>
+                <form>
+                    <select class="form-select">
+                        <option>Equipo 1</option>
+                        <option>Equipo 2</option>
+                    </select>
+                    <button class="btn btn-success" type="submit">+</button>
+                </form>
+                <hr/>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Equipo6</td>
+                            <td><a class="btn btn-success" href="#">X</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
         <%- include('footer') %>
     </body>
 </html>

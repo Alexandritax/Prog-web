@@ -14,10 +14,15 @@ module.exports = (sequelize, DataTypes) => {
       Torneo.belongsTo(models.TipoTorneo, {
           foreignKey : "tipoTorneoId"
       })
+
+      Torneo.hasMany(models.TorneoEquipo,{
+        foreignKey: "torneoId"
+      })
     }
   };
   Torneo.init({
     nombre: DataTypes.STRING,
+    tipoTorneoId: DataTypes.INTEGER,
     fecha: DataTypes.DATE,
     estado: DataTypes.INTEGER
   }, {

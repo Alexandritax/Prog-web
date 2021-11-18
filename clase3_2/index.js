@@ -65,39 +65,69 @@ app.get('/', (req, res) => {
 
     })
 
-app.get('/torneos', async (req, res) => {
-    const timestampActual = new Date().getTime();
-    const dif = timestampActual - req.session.lastLogin
+    app.get('/torneos', async (req, res)=> {
+        const timestampActual = new Date().getTime();
+        const dif = timestampActual - req.session.lastLogin
+    
+        if (dif >= 3 * 60 * 60 * 1000) {
+            req.session.destroy() // Destruyes la sesion
+            res.render('/login')
+        }else {
+            // Obtener torneos de la base de datos
+            const torneos = await db.Torneo.findAll({
+                order : [
+                    ['id', 'DESC']
+                ]
+            });
 
-    if (dif >= 3 * 60 * 60 * 1000) {
-        req.session.destroy() // Destruyes la sesion
-        res.render('/login')
-    }
-    else {
-        // Obtener torneos de la base de datos
-        const torneos = await db.Torneo.findAll({
-            order : [
-                ['id', 'DESC']
-            ]
-        });
-        //console.log(torneos);
-        res.render('torneos', {
-            torneos : torneos
-        })
-    }    
-})
 
-app.get("/torneos/new", (req,res) => {
-    res.render("torneos_new")
+    
+            let nuevaListaTorneos = []
+            for (let torneo of torneos) {
+            const tipoTorneo = await torneo.getTipoTorneo()
+                nuevaListaTorneos.push({
+                    id : torneo.id,
+                    nombre : torneo.nombre,
+                    fecha : torneo.fecha,
+                    tipoTorneoNombre : tipoTorneo.nombre
+                })
+            }
+            console.log("lista", nuevaListaTorneos)
+            
+            // Agregamos el nombre del TipoTorneo a lista
+            /* const nuevaListaTorneos = torneos.map( async (torneo)=>{
+                const tipoTorneo = await torneo.getTipoTorneo()
+                torneo.tipoTorneoNombre = tipoTorneo.nombre
+                console.log(torneo)
+                return {
+                    torneo
+                }
+            } )*/
+    
+    
+            res.render('torneos', {
+                torneos : nuevaListaTorneos
+            }) 
+        }
+    
+    })
+
+app.get("/torneos/new", async (req,res) => {
+    const tiposTorneo = await db.TipoTorneo.findAll()
+    res.render("torneos_new", {
+        tiposTorneo : tiposTorneo
+    })
 })
 
 app.post("/torneos/new", async (req,res) => {
     const torneoNombre = req.body.torneo_nombre
     const torneoFecha = req.body.torneo_fecha;
+    const torneoTipoid = req.body.torneo_torneoTipoid;
     //console.log(req)
     await db.Torneo.create({
         nombre :torneoNombre,
         fecha :torneoFecha,
+        tipoTorneoId: torneoTipoid,
         estado: 1
     });
     res.redirect("/torneos")
@@ -115,8 +145,11 @@ app.get("/torneos/update/:id", async (req,res) => {
         }
     })
 
+    const tiposTorneo = await db.TipoTorneo.findAll()
+
     res.render('torneos_update', {
-        torneo: torneo
+        torneo: torneo,
+        tiposTorneo : tiposTorneo
     })
 })
 
@@ -132,6 +165,8 @@ app.post('/torneos/update', async (req, res) => {
     const idTorneo = req.body.torneo_id
     const nombre =req.body.torneo_nombre
     const fecha = req.body.torneo_fecha
+    const tipoTorneoId = req.body.torneo_tipotorneo_id
+    
 
     //1. Obtener un torneo con id: idTorneo
     const torneo = await db.Torneo.findOne({
@@ -142,6 +177,7 @@ app.post('/torneos/update', async (req, res) => {
     //2. Cambiar su propiedas / campos
     torneo.nombre = nombre
     torneo.fecha = fecha
+    torneo.tipoTorneoId = tipoTorneoId
 
     //3. Guardo/Actualizo en la base de datos
     await torneo.save()
