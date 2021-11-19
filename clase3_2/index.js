@@ -17,8 +17,8 @@ app.use(session({
     resave : false,
     saveUninitialized : false
 })) 
-app.get('/', (req, res) => {
-/*     const listaEventos = [
+app.get('/eventos', (req, res) => {
+    const listaEventos = [
         {
             id: 1,
             nombre: 'Torneo Marzo 2021'
@@ -61,7 +61,7 @@ app.get('/', (req, res) => {
     ];
     res.render('index',{
         eventos : listaEventos,
-        topPlayers: listaTopPlayers}) */
+        topPlayers: listaTopPlayers})
 
     })
 
@@ -80,8 +80,6 @@ app.get('/', (req, res) => {
                 ]
             });
 
-
-    
             let nuevaListaTorneos = []
             for (let torneo of torneos) {
             const tipoTorneo = await torneo.getTipoTorneo()
@@ -92,7 +90,7 @@ app.get('/', (req, res) => {
                     tipoTorneoNombre : tipoTorneo.nombre
                 })
             }
-            console.log("lista", nuevaListaTorneos)
+            //console.log("lista", nuevaListaTorneos)
             
             // Agregamos el nombre del TipoTorneo a lista
             /* const nuevaListaTorneos = torneos.map( async (torneo)=>{
