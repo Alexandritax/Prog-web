@@ -8,47 +8,52 @@
     </head>
     <body class="container">
         <%- include('menu') %>
-
-        <h2>Formulario Torneo</h2>
-        <form method="post" action="/torneos/update">
-            <input type="hidden" name="torneo_id" value="<%=torneo.id%>"/>
-            <div>
-                <label class="form-label">Nombre:</label>
-                <input name="torneo_nombre" 
-                    type="text" 
-                    class="form-control"
-                    value="<%= torneo.nombre %>" />
-            </div>
-            <div>
-                <label class="form-label">Tipo Torneo:</label>
-                <select name="torneo_tipotorneo_id" class="form-select">
-                    <option value="-1">----- Seleccione una opción -----</option>
-                    <% tiposTorneo.forEach( (tipo)=> { %>
-                        <% if (tipo.id == torneo.tipoTorneoId)  { %>
-                            <option selected value="<%= tipo.id%>"><%= tipo.nombre %></option>
-                        <% }else { %>
-                            <option value="<%= tipo.id%>"><%= tipo.nombre %></option>
-                        <% } %>
-                    <% }) %>
-                </select>
-            </div>
-            <div class="mb-2">
-                <label class="form-label">Fecha:</label>
-                <input name="torneo_fecha" 
-                    type="date" 
-                    class="form-control"
-                    value="<%= torneo.fecha.toISOString().substring(0,10) %>"/>
-            </div>
-            <button type="submit" class="btn btn-success">Guardar</button>
-        </form>
+    <div class="row">
+        <div class="col">
+            <h2>Formulario Torneo</h2>
+            <form method="post" action="/torneos/update">
+                <input type="hidden" name="torneo_id" value="<%=torneo.id%>"/>
+                <div>
+                    <label class="form-label">Nombre:</label>
+                    <input name="torneo_nombre"
+                        type="text"
+                        class="form-control"
+                        value="<%= torneo.nombre %>" />
+                </div>
+                <div>
+                    <label class="form-label">Tipo Torneo:</label>
+                    <select name="torneo_tipotorneo_id" class="form-select">
+                        <option value="-1">----- Seleccione una opción -----</option>
+                        <% tiposTorneo.forEach( (tipo)=> { %>
+                            <% if (tipo.id == torneo.tipoTorneoId)  { %>
+                                <option selected value="<%= tipo.id%>"><%= tipo.nombre %></option>
+                            <% }else { %>
+                                <option value="<%= tipo.id%>"><%= tipo.nombre %></option>
+                            <% } %>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Fecha:</label>
+                    <input name="torneo_fecha"
+                        type="date"
+                        class="form-control"
+                        value="<%= torneo.fecha.toISOString().substring(0,10) %>"/>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </form>
+        </div>
         <div class="col">
             <!-- Lista de equipos -->
             <h3>Equipos registrados</h3>
             <div>
-                <form>
-                    <select class="form-select">
-                        <option>Equipo 1</option>
-                        <option>Equipo 2</option>
+                <form method="post" action="/torneo/equipo/inscribir">
+                    <input type="hidden" name="inscripcion_torneo_id" value="<%=torneo.id%>"/>
+                    <select class="form-select" name="inscripcion_equipo_id">
+                        <option value="-1">----- Seleccione una opción -----</option>
+                        <%equipos.forEach( (equipo)=> {%>
+                        <option value="<%=equipo.id%>"><%=equipo.nombre%></option>
+                        <%})%>
                     </select>
                     <button class="btn btn-success" type="submit">+</button>
                 </form>
@@ -61,10 +66,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Equipo6</td>
-                            <td><a class="btn btn-success" href="#">X</a></td>
-                        </tr>
+                        <% equiposEnTorneo.forEach((equipo)=> { %>
+                            <tr>
+                                <td><%= equipo.nombre %></td>
+                                <td><a class="btn btn-success" 
+                                        href="/torneo/equipo/delete/<%= torneo.id %>/<%= equipo.id %>">
+                                        X
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }) %>
                     </tbody>
                 </table>
             </div>

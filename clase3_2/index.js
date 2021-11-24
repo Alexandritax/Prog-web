@@ -65,50 +65,49 @@ app.get('/eventos', (req, res) => {
 
     })
 
-    app.get('/torneos', async (req, res)=> {
-        const timestampActual = new Date().getTime();
-        const dif = timestampActual - req.session.lastLogin
-    
-        if (dif >= 3 * 60 * 60 * 1000) {
-            req.session.destroy() // Destruyes la sesion
-            res.render('/login')
-        }else {
-            // Obtener torneos de la base de datos
-            const torneos = await db.Torneo.findAll({
-                order : [
-                    ['id', 'DESC']
-                ]
-            });
+app.get('/torneos', async (req, res)=> {
+    const timestampActual = new Date().getTime();
+    const dif = timestampActual - req.session.lastLogin
 
-            let nuevaListaTorneos = []
-            for (let torneo of torneos) {
-            const tipoTorneo = await torneo.getTipoTorneo()
-                nuevaListaTorneos.push({
-                    id : torneo.id,
-                    nombre : torneo.nombre,
-                    fecha : torneo.fecha,
-                    tipoTorneoNombre : tipoTorneo.nombre
-                })
-            }
-            //console.log("lista", nuevaListaTorneos)
-            
-            // Agregamos el nombre del TipoTorneo a lista
-            /* const nuevaListaTorneos = torneos.map( async (torneo)=>{
-                const tipoTorneo = await torneo.getTipoTorneo()
-                torneo.tipoTorneoNombre = tipoTorneo.nombre
-                console.log(torneo)
-                return {
-                    torneo
-                }
-            } )*/
-    
-    
-            res.render('torneos', {
-                torneos : nuevaListaTorneos
-            }) 
+    if (dif >= 3 * 60 * 60 * 1000) {
+        req.session.destroy() // Destruyes la sesion
+        res.render('/login')
+    }else {
+        // Obtener torneos de la base de datos
+        const torneos = await db.Torneo.findAll({
+            order : [
+                ['id', 'DESC']
+            ]
+        });
+        let nuevaListaTorneos = []
+        for (let torneo of torneos) {
+        const tipoTorneo = await torneo.getTipoTorneo()
+            nuevaListaTorneos.push({
+                id : torneo.id,
+                nombre : torneo.nombre,
+                fecha : torneo.fecha,
+                tipoTorneoNombre : tipoTorneo.nombre
+            })
         }
-    
-    })
+        //console.log("lista", nuevaListaTorneos)
+        
+        // Agregamos el nombre del TipoTorneo a lista
+        /* const nuevaListaTorneos = torneos.map( async (torneo)=>{
+            const tipoTorneo = await torneo.getTipoTorneo()
+            torneo.tipoTorneoNombre = tipoTorneo.nombre
+            console.log(torneo)
+            return {
+                torneo
+            }
+        } )*/
+
+
+        res.render('torneos', {
+            torneos : nuevaListaTorneos
+        }) 
+    }
+
+})
 
 app.get("/torneos/new", async (req,res) => {
     const tiposTorneo = await db.TipoTorneo.findAll()
@@ -145,9 +144,26 @@ app.get("/torneos/update/:id", async (req,res) => {
 
     const tiposTorneo = await db.TipoTorneo.findAll()
 
+    const equiposRegistrados = await db.Equipo.findAll()
+
+    const torneoEquipos = await db.TorneoEquipo.findAll({
+        where: {
+            torneoId: idTorneo
+        }
+    })
+
+    const arrEquiposEnTorneo = []
+    if (torneoEquipos.length > 0) {
+        for (let te of torneoEquipos) {
+            const equipo = await te.getEquipo()
+            arrEquiposEnTorneo.push(equipo)
+        }
+    }
     res.render('torneos_update', {
         torneo: torneo,
-        tiposTorneo : tiposTorneo
+        tiposTorneo : tiposTorneo,
+        equipos: equiposRegistrados,
+        equiposEnTorneo : arrEquiposEnTorneo
     })
 })
 
@@ -182,6 +198,43 @@ app.post('/torneos/update', async (req, res) => {
 
     res.redirect('/torneos')
 
+})
+
+app.post('/torneo/equipo/inscribir', async (req, res) => {
+    const torneoId = req.body.inscripcion_torneo_id
+    const equipoId = req.body.inscripcion_equipo_id
+
+    const equipos = await db.TorneoEquipo.findAll({
+        where: {
+            torneoId: torneoId,
+            equipoId: equipoId
+        }
+    })
+  
+    if(equipos.length == 0){
+        await db.TorneoEquipo.create({
+            torneoId: torneoId,
+            equipoId: equipoId,
+            status: 1
+        })
+    }
+
+    res.redirect(`/torneos/update/${torneoId}`)
+    
+})
+
+app.get('/torneo/equipo/delete/:idtorneo/:idequipo', async (req, res) => {
+    const torneoId = req.params.idtorneo
+    const equipoId = req.params.idequipo
+
+    await db.TorneoEquipo.destroy({
+        where : {
+            torneoId : torneoId,
+            equipoId : equipoId
+        }
+    })
+
+    res.redirect(`/torneos/update/${torneoId}`)
 })
 
 app.post('/login', (req, res) => {
