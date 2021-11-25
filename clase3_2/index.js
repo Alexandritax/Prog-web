@@ -18,7 +18,7 @@ app.use(session({
     resave : false,
     saveUninitialized : false
 })) 
-app.get('/eventos', (req, res) => {
+app.get('/', (req, res) => {
     const listaEventos = [
         {
             id: 1,
