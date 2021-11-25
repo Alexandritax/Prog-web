@@ -7,10 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "start:dev": "npx nodemon index.js",
-    "db:drop":"npx sequelize db:drop --config ./dao/config/config.json",
-    "db:create":"npx sequelize db:create --config ./dao/config/config.json",
-    "db:migrate":"npx sequelize db:migrate --config ./dao/config/config.json --migrations-path .dao/migrations",
-    "db:seed":"npx sequelize db:seed:all --config ./dao/config/config.json --seeders-path .dao/seeders"
+    "db:drop": "npx sequelize db:drop --config ./dao/config/config.json",
+    "db:create": "npx sequelize db:create --config ./dao/config/config.json",
+    "db:migrate": "npx sequelize db:migrate --config ./dao/config/config.json --migrations-path ./dao/migrations",
+    "db:seed": "npx sequelize db:seed:all --config ./dao/config/config.json --seeders-path ./dao/seeders"
   },
   "repository": {
     "type": "git",
@@ -25,9 +25,11 @@
     "express-session": "^1.17.2",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.9.0"
+    "sequelize": "^6.9.0",
+    "sequelize-cli": "^6.3.0"
   },
   "devDependencies": {
+    "nodemon": "^2.0.15",
     "sequelize-cli": "^6.3.0"
   }
 }

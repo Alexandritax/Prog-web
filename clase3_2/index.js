@@ -82,7 +82,7 @@ app.get('/torneos', async (req, res)=> {
         });
         let nuevaListaTorneos = []
         for (let torneo of torneos) {
-        const tipoTorneo = await torneo.getTipoTorneo()
+            const tipoTorneo = await torneo.getTipoTorneo()
             nuevaListaTorneos.push({
                 id : torneo.id,
                 nombre : torneo.nombre,
